@@ -34,18 +34,22 @@ class Recorder{
             AVEncoderAudioQualityKey:AVAudioQuality.Max.rawValue
             
         ]
+        //TODO: This is to also send over the recording as a record to an external DB
+        var id = IdManager.generateId()
+        var url = FileManager.recordingStoragePath(id)
+
+        //TODO: This has to stay inside record() to make user a new recording is created each time
+        
+        //TODO: This can be the way to refactor the initializer but initialize a new recording each time
+        //audioRecorder.url
         
         
         var error: NSError?
-        //TODO: This has to stay inside record() to make user a new recording is created each time
-        var url = storagePath(generateId())
-        
         audioRecorder = AVAudioRecorder(
             URL:url,
             settings: recordSettings as [NSObject:AnyObject],
             error: &error)
-        //TODO: This can be the way to refactor the initializer but initialize a new recording each time
-        //audioRecorder.url
+
         if let e = error {
             println(e.localizedDescription)
         } else {
@@ -72,31 +76,8 @@ class Recorder{
         audioPlayer.play()
     }
     
-    //MARK: Helpers
-    //TODO: Move these to a shared concern
-    private func storagePath(recordingId: String) -> NSURL{
-        var documents: AnyObject = NSSearchPathForDirectoriesInDomains( NSSearchPathDirectory.DocumentDirectory,  NSSearchPathDomainMask.UserDomainMask, true)[0]
-        var recordings: String = documents.stringByAppendingPathComponent("Recordings")
-        var fm = NSFileManager()
-        var error: NSError?
-        //TODO: Move this to an app initialization state
-        fm.createDirectoryAtPath(recordings, withIntermediateDirectories: true, attributes: nil, error: &error)
-        if let e = error{
-            println(e.localizedDescription)
-        }
-        var str =  "\(recordings)/\(fileName(recordingId))"
-        var url = NSURL.fileURLWithPath(str as String)
-        println("url : \(url)")
-        return url!
-    }
+
     
-    private func fileName(recordingId : String) -> String {
-        return "\(recordingId).caf"
-    }
-    
-    private func generateId() -> String{
-        return NSUUID().UUIDString
-    }
-    
+        
     
 }

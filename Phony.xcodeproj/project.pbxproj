@@ -16,6 +16,10 @@
 		0A864DCA1AF552D10078D137 /* PhonyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DC91AF552D10078D137 /* PhonyTests.swift */; };
 		0A864DD51AF5630A0078D137 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DD41AF5630A0078D137 /* Recorder.swift */; };
 		0A864DD61AF5630A0078D137 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DD41AF5630A0078D137 /* Recorder.swift */; };
+		0A864DD91AF5E2A70078D137 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DD81AF5E2A70078D137 /* FileManager.swift */; };
+		0A864DDA1AF5E2A70078D137 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DD81AF5E2A70078D137 /* FileManager.swift */; };
+		0A864DDC1AF5E3040078D137 /* IdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DDB1AF5E3040078D137 /* IdManager.swift */; };
+		0A864DDD1AF5E3040078D137 /* IdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DDB1AF5E3040078D137 /* IdManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,8 @@
 		0A864DC81AF552D10078D137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A864DC91AF552D10078D137 /* PhonyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonyTests.swift; sourceTree = "<group>"; };
 		0A864DD41AF5630A0078D137 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		0A864DD81AF5E2A70078D137 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		0A864DDB1AF5E3040078D137 /* IdManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,7 @@
 		0A864DAE1AF552D10078D137 /* Phony */ = {
 			isa = PBXGroup;
 			children = (
+				0A864DD71AF5E28F0078D137 /* Lib */,
 				0A864DD31AF562DE0078D137 /* Models */,
 				0A864DB11AF552D10078D137 /* AppDelegate.swift */,
 				0A864DB31AF552D10078D137 /* FirstViewController.swift */,
@@ -125,6 +132,15 @@
 				0A864DD41AF5630A0078D137 /* Recorder.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		0A864DD71AF5E28F0078D137 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A864DD81AF5E2A70078D137 /* FileManager.swift */,
+				0A864DDB1AF5E3040078D137 /* IdManager.swift */,
+			);
+			name = Lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,9 +243,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A864DD91AF5E2A70078D137 /* FileManager.swift in Sources */,
 				0A864DB61AF552D10078D137 /* SecondViewController.swift in Sources */,
 				0A864DB21AF552D10078D137 /* AppDelegate.swift in Sources */,
 				0A864DB41AF552D10078D137 /* FirstViewController.swift in Sources */,
+				0A864DDC1AF5E3040078D137 /* IdManager.swift in Sources */,
 				0A864DD51AF5630A0078D137 /* Recorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,7 +256,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A864DDA1AF5E2A70078D137 /* FileManager.swift in Sources */,
 				0A864DCA1AF552D10078D137 /* PhonyTests.swift in Sources */,
+				0A864DDD1AF5E3040078D137 /* IdManager.swift in Sources */,
 				0A864DD61AF5630A0078D137 /* Recorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
