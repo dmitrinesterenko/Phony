@@ -17,6 +17,21 @@ class FileManager{
         return recordingUrl
     }
     
+    static func dictionariesUrl(dictionaryTitle: String) -> String?{
+        return NSBundle.mainBundle().resourcePath?.stringByAppendingPathComponent("Dictionaries").stringByAppendingPathComponent(dictionaryTitle)
+    }
+    
+    static func rootUrl() -> String{
+        return NSBundle.mainBundle().resourcePath!
+        
+    }
+    
+    /*static func getFilesInPath(path: String)->Array{
+        var fm = NSFileManager()
+        fm.enumeratorAtPath(path)
+        
+    }*/
+    
     static func recordingStoragePath(recordingId: String) -> NSURL{
         var fullPath =  "\(self.recordingUrl())/\(recordingFileName(recordingId))"
         var url = NSURL.fileURLWithPath(fullPath as String)

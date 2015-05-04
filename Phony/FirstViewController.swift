@@ -11,9 +11,18 @@ import UIKit
 class FirstViewController: UIViewController {
 
     var recorder = Recorder()
+    var player = Player()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //TODO: load files from the selected dictionary
+        
+        let dictionaryUrl = FileManager.dictionariesUrl("Sample")
+        let hello = FileManager.rootUrl().stringByAppendingPathComponent("Hello.caf")
+        player.play(hello)
+    
+        
         
         //TODO: Move into an separate function
         /*var recordAndStop:UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
