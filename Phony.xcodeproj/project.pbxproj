@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A3A81B31AF6AC1C0099B927 /* Hello.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A81B21AF6AC1C0099B927 /* Hello.caf */; };
+		0A1D35311AFE8B8000CA7364 /* Dictionaries in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D35301AFE8B8000CA7364 /* Dictionaries */; };
+		0A21C7CE1AFE95F90044C18B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21C7CD1AFE95F90044C18B /* Log.swift */; };
+		0A21C7CF1AFE95F90044C18B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21C7CD1AFE95F90044C18B /* Log.swift */; };
 		0A3A81B41AF6AC1C0099B927 /* Hello.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A81B21AF6AC1C0099B927 /* Hello.caf */; };
 		0A3A81B61AF6B8260099B927 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A81B51AF6B8260099B927 /* Player.swift */; };
 		0A3A81B71AF6B8260099B927 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A81B51AF6B8260099B927 /* Player.swift */; };
+		0A84543E1AFEB599002E142B /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0A84543D1AFEB599002E142B /* en.lproj */; };
+		0A84543F1AFEB599002E142B /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 0A84543D1AFEB599002E142B /* en.lproj */; };
+		0A8454401AFECC0A002E142B /* Hello.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0A3A81B21AF6AC1C0099B927 /* Hello.caf */; };
 		0A864DB21AF552D10078D137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DB11AF552D10078D137 /* AppDelegate.swift */; };
 		0A864DB41AF552D10078D137 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DB31AF552D10078D137 /* FirstViewController.swift */; };
 		0A864DB61AF552D10078D137 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A864DB51AF552D10078D137 /* SecondViewController.swift */; };
@@ -37,8 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1D35301AFE8B8000CA7364 /* Dictionaries */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Dictionaries; path = Phony/Assets/Dictionaries; sourceTree = "<group>"; };
+		0A21C7CD1AFE95F90044C18B /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = Lib/Log.swift; sourceTree = "<group>"; };
 		0A3A81B21AF6AC1C0099B927 /* Hello.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hello.caf; sourceTree = "<group>"; };
 		0A3A81B51AF6B8260099B927 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		0A84543D1AFEB599002E142B /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en.lproj; path = Phony/en.lproj; sourceTree = "<group>"; };
 		0A864DAC1AF552D10078D137 /* Phony.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phony.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A864DB01AF552D10078D137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A864DB11AF552D10078D137 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +108,8 @@
 		0A864DA31AF552D00078D137 = {
 			isa = PBXGroup;
 			children = (
+				0A84543D1AFEB599002E142B /* en.lproj */,
+				0A1D35301AFE8B8000CA7364 /* Dictionaries */,
 				0A864DAE1AF552D10078D137 /* Phony */,
 				0A864DC61AF552D10078D137 /* PhonyTests */,
 				0A864DAD1AF552D10078D137 /* Products */,
@@ -171,6 +181,7 @@
 			children = (
 				0A864DD81AF5E2A70078D137 /* FileManager.swift */,
 				0A864DDB1AF5E3040078D137 /* IdManager.swift */,
+				0A21C7CD1AFE95F90044C18B /* Log.swift */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -255,9 +266,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A8454401AFECC0A002E142B /* Hello.caf in Resources */,
+				0A1D35311AFE8B8000CA7364 /* Dictionaries in Resources */,
 				0A864DB91AF552D10078D137 /* Main.storyboard in Resources */,
-				0A3A81B31AF6AC1C0099B927 /* Hello.caf in Resources */,
 				0A864DBE1AF552D10078D137 /* LaunchScreen.xib in Resources */,
+				0A84543E1AFEB599002E142B /* en.lproj in Resources */,
 				0A864DBB1AF552D10078D137 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A84543F1AFEB599002E142B /* en.lproj in Resources */,
 				0A3A81B41AF6AC1C0099B927 /* Hello.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +297,7 @@
 				0A864DB41AF552D10078D137 /* FirstViewController.swift in Sources */,
 				0A3A81B61AF6B8260099B927 /* Player.swift in Sources */,
 				0A864DDC1AF5E3040078D137 /* IdManager.swift in Sources */,
+				0A21C7CE1AFE95F90044C18B /* Log.swift in Sources */,
 				0A864DD51AF5630A0078D137 /* Recorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +308,7 @@
 			files = (
 				0A864DDA1AF5E2A70078D137 /* FileManager.swift in Sources */,
 				0A864DCA1AF552D10078D137 /* PhonyTests.swift in Sources */,
+				0A21C7CF1AFE95F90044C18B /* Log.swift in Sources */,
 				0A864DDD1AF5E3040078D137 /* IdManager.swift in Sources */,
 				0A3A81B71AF6B8260099B927 /* Player.swift in Sources */,
 				0A864DD61AF5630A0078D137 /* Recorder.swift in Sources */,

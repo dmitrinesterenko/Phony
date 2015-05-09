@@ -12,12 +12,27 @@ import AVFoundation
 class Player{
     
     var audioPlayer = AVAudioPlayer()
+    //var currentFileUrl : NSURL
+    init(fileUrl: String){
+       // var error:NSError?
+        //currentFileUrl = NSURL(string:fileUrl)!
+        //audioPlayer = AVAudioPlayer(contentsOfURL: currentFileUrl, error: &error)
+        //if error != nil{
+        //    Log.exception(error!.localizedDescription)
+        //}
+    }
     
     func play(fileUrl: String){
         var error:NSError?
-        let url = NSURL(string: fileUrl)
-        audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
+        var currentFileUrl = NSURL(string:fileUrl)!
+        Log.debug(fileUrl)
+        audioPlayer = AVAudioPlayer(contentsOfURL: currentFileUrl, error: &error)
+
         audioPlayer.prepareToPlay()
         audioPlayer.play()
+    }
+    
+    func length(){
+       //audioPlayer.
     }
 }

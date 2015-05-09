@@ -17,8 +17,14 @@ class FileManager{
         return recordingUrl
     }
     
-    static func dictionariesUrl(dictionaryTitle: String) -> String?{
-        return NSBundle.mainBundle().resourcePath?.stringByAppendingPathComponent("Dictionaries").stringByAppendingPathComponent(dictionaryTitle)
+    static func dictionariesUrl(dictionaryTitle: String) -> String!{
+        if let url = NSBundle.mainBundle().resourcePath {
+            return url.stringByAppendingPathComponent("Dictionaries").stringByAppendingPathComponent(dictionaryTitle)
+
+        }
+        Log.exception("Could not find the dictionary in \(dictionaryTitle)")
+        return nil
+
     }
     
     static func rootUrl() -> String{

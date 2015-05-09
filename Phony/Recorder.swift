@@ -18,8 +18,9 @@ class Recorder{
     var audioPlayer = AVAudioPlayer()
 
     //MARK: Actions
-    //TODO: Think about moving most of this into init()
+
     func record(){
+        //TODO: Think about moving most of this into init()
         var audioSession:AVAudioSession = AVAudioSession.sharedInstance()
         audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
         audioSession.setActive(true, error: nil)
