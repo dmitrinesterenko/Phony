@@ -13,33 +13,18 @@ class FirstViewController: UIViewController {
 
     var recorder = Recorder()
     
-    //to avoid threading problems you can run everything on the main thread
-    var player = Player(fileUrl:"")
+    //To avoid having to use and understand threading with the play back you can run everything on the main thread
+    //including the player here makes the controller functions wait on the 
+    //response from a player instance
+    var player = Player()
+    
+    @IBOutlet weak var duration: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //TODO: load files from the selected dictionary
-        
 
-    
-//        var audioPlayer = AVAudioPlayer()
-//        var currentFileUrl = NSURL(string:hello)!
-//        var error:NSError?
-//        audioPlayer = AVAudioPlayer(contentsOfURL: currentFileUrl, error: &error)
-//        
-//        audioPlayer.prepareToPlay()
-//        audioPlayer.play()
-        
-        //TODO: Move into an separate function
-        /*var recordAndStop:UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        recordAndStop.frame = CGRectMake(0,0,100,44)
-        recordAndStop.setTitle("Record", forState: UIControlState.Normal)
-        self.view.addSubview(recordAndStop as UIView)
-        //Start in the record state
-        recordAndStop.addTarget(self, action: "record:", forControlEvents: UIControlEvents.TouchUpInside)
-        */
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,37 +32,16 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+
     @IBAction func play(sender: AnyObject) {
         let dictionaryUrl = FileManager.dictionariesUrl("Sample")
-        //let fileUrl = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
-        let fileUrl = FileManager.rootUrl().stringByAppendingPathComponent("Hello.caf")
-        
-        //hardcoded
-       /* var error:NSError?
-        var currentFileUrl = NSURL(string:fileUrl)!
-        Log.debug(fileUrl)
-        audioPlayer = AVAudioPlayer(contentsOfURL: currentFileUrl, error: &error)
-        audioPlayer.playing
-        if error != nil{
-            Log.exception(error!.localizedDescription)
-        }
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
-        //because of threading this stops execution unless we pause the main thread
-        //or if we do this on another thread
-        while(audioPlayer.playing){
-            Log.debug("Playing")
-        }
-        if audioPlayer.playing{
-            Log.debug("Playing")
-        }else{
-            Log.debug("Not playing")
-        }
-*/
-        //end hardcoded
-        
+        let fileUrl = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
         player = Player(fileUrl: fileUrl)
-        player.play(fileUrl	)
+        player.play()
+        
+        while(player.playing){
+            duration.text = "\(player.currentTime) of  \(player.duration.description)s"
+        }
         
         
     }
