@@ -17,6 +17,7 @@ class FirstViewController: UIViewController {
     //including the player here makes the controller functions wait on the 
     //response from a player instance
     var player = Player()
+    var timer = NSTimer()
     
     @IBOutlet weak var duration: UILabel!
     
@@ -36,14 +37,18 @@ class FirstViewController: UIViewController {
     @IBAction func play(sender: AnyObject) {
         let dictionaryUrl = FileManager.dictionariesUrl("Sample")
         let fileUrl = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
+        let progressSelector : Selector = "updatePlayTime:"
+        
         player = Player(fileUrl: fileUrl)
         player.play()
-        
-        while(player.playing){
-            duration.text = "\(player.currentTime) of  \(player.duration.description)s"
-        }
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
+       
         
         
+    }
+    
+    func updatePlayTime(currentTime:NSTimeInterval){
+       duration.text = "\(player.currentTime)"
     }
     
     @IBAction func record(sender: AnyObject) {
@@ -56,7 +61,10 @@ class FirstViewController: UIViewController {
     
     @IBAction func stop(sender: AnyObject) {
         recorder.stop()
-        //TODO: Refactor into a UIStateUpdater
+        //TODO: Refactor into a UIStateUpdateri
+        timer.invalidate()
+        
+        
         sender.setTitle("Record", forState: UIControlState.Normal)
         sender.removeTarget(self, action: "stop:", forControlEvents:UIControlEvents.TouchUpInside)
         sender.addTarget(self, action: "record:", forControlEvents: UIControlEvents.TouchUpInside)
