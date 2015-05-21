@@ -45,7 +45,8 @@ class FirstViewController: UIViewController {
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
        
         UIView.animateWithDuration(0.7, delay: 1.0, options: .CurveEaseOut, animations: {
-            self.soundCircle.increaseSize()
+            //self.soundCircle.increaseSize()
+            self.soundCircle.frame.origin.y -= 100
             /*
             var basketTopFrame = self.basketTop.frame
             basketTopFrame.origin.y -= basketTopFrame.size.height
