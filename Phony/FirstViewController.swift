@@ -20,6 +20,7 @@ class FirstViewController: UIViewController {
     var timer = NSTimer()
     
     @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var soundCircle: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,21 @@ class FirstViewController: UIViewController {
         player.play()
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
        
-        
+        UIView.animateWithDuration(0.7, delay: 1.0, options: .CurveEaseOut, animations: {
+            self.soundCircle.increaseSize()
+            /*
+            var basketTopFrame = self.basketTop.frame
+            basketTopFrame.origin.y -= basketTopFrame.size.height
+            
+            var basketBottomFrame = self.basketBottom.frame
+            basketBottomFrame.origin.y += basketBottomFrame.size.height
+            
+            self.basketTop.frame = basketTopFrame
+            self.basketBottom.frame = basketBottomFrame
+*/
+            }, completion: { finished in
+                println("Basket doors opened!")
+        })
         
     }
     

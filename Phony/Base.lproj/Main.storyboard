@@ -71,6 +71,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="220px-Circle_-_black_simple.svg.png" translatesAutoresizingMaskIntoConstraints="NO" id="uWx-jP-hib">
+                                <rect key="frame" x="180" y="176" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -94,6 +97,7 @@
                     <tabBarItem key="tabBarItem" title="Dictionary" image="first" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="duration" destination="rAv-xN-KyX" id="Qz5-hk-cm9"/>
+                        <outlet property="soundCircle" destination="uWx-jP-hib" id="7hM-lE-gEn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -161,6 +165,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="220px-Circle_-_black_simple.svg.png" width="220" height="220"/>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
