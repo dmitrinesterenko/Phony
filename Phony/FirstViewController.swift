@@ -16,15 +16,29 @@ class FirstViewController: UIViewController {
     //To avoid having to use and understand threading with the play back you can run everything on the main thread
     //including the player here makes the controller functions wait on the 
     //response from a player instance
+    //TODO: understand this better
     var player = Player()
     var timer = NSTimer()
+    var progress : Progress!
     
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var soundCircle: UIImageView!
     
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.progress = Progress(inView:self.view)
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         //TODO: load files from the selected dictionary
 
     }
@@ -42,11 +56,13 @@ class FirstViewController: UIViewController {
                player = Player(fileUrl: fileUrl)
         player.play()
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
-        // This needs to be inited at the viewLoad layer so that it's available all through out the view
-        // The progress bar(s) are the subviews
-        let progress = Progress(inView: self.view)
+        
+        progress.start()
         progress.showFirstStep(player.duration)
-        progress.showIntermissions()
+        Conductor.playAfter(player.duration){
+            self.progress.showIntermission()
+        }
+    
         
         // Start Recording
         // this selector means to check if the time of the recording has surpassed the time
@@ -69,7 +85,7 @@ class FirstViewController: UIViewController {
                 recorder.stop()
             }
         }
-    
+        
     }
     
     func updatePlayTime(currentTime:NSTimeInterval){
