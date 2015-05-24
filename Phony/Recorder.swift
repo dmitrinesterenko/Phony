@@ -13,15 +13,18 @@ class Recorder{
     
     var audioRecorder:AVAudioRecorder!
     var recorded: Array<NSURL> = []
+    var durationToRecord: NSTimeInterval = 0.0
     
     //TODO: Move this into it's own class called Boombox
     var audioPlayer = AVAudioPlayer()
 
     //MARK: Actions
 
-    func record(){
+    func record(duration: NSTimeInterval){
         //TODO: Think about moving most of this into init()
         var audioSession:AVAudioSession = AVAudioSession.sharedInstance()
+        durationToRecord = duration
+        
         audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
         audioSession.setActive(true, error: nil)
         
@@ -59,6 +62,10 @@ class Recorder{
         }
     }
     
+    var currentTime : NSTimeInterval{
+        return audioRecorder.currentTime
+    }
+    
     func stop(){
         if audioRecorder.recording {
             println("Recording stopped")
@@ -71,10 +78,12 @@ class Recorder{
     }
     
     func playLast(){
-        var error:NSError?
-        audioPlayer = AVAudioPlayer(contentsOfURL: recorded.last, error: &error)
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
+        if recorded.count > 0 {
+            var error:NSError?
+            audioPlayer = AVAudioPlayer(contentsOfURL: recorded.last, error: &error)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+        }
     }
     
 
