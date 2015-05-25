@@ -51,9 +51,9 @@ class FirstViewController: UIViewController {
     // play is play and record + feedback
     @IBAction func play(sender: AnyObject) {
         let dictionaryUrl = FileManager.dictionariesUrl("Sample")
-        let fileUrl = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
+        let filePath = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
         let progressSelector : Selector = "updatePlayTime:"
-               player = Player(fileUrl: fileUrl)
+        player = Player(filePath:filePath)
         player.play()
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
         

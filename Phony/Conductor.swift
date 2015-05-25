@@ -13,13 +13,13 @@ class Conductor{
     static func playAt(time: NSTimeInterval){
         NSException(name: "Not implemented", reason: "", userInfo: nil).raise()
     }
-    
+
     // After a certain delay execute the tune closure provided which currently
     // does not take or return any parameters
     // NOTE: This currently plays the tune on the dispatch_get_main_queue
     static func playAfter(delayInSeconds:NSTimeInterval, tune: ()->()){
         let popTime = TimeUtil.delayFromNow(delayInSeconds)
-        Log.debug("delay \(delayInSeconds)")
+        Log.debug("Conducting delay \(delayInSeconds) \(dump(tune))")
         // Here have to wait for each to finish
         dispatch_after(popTime, dispatch_get_main_queue(),{
             tune()

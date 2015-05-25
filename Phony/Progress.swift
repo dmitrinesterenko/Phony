@@ -34,6 +34,7 @@ class Progress{
         progress.backgroundColor = UIColor.blackColor()
         progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.width, height:self.height)
     }
+    
     func showFirstStep(duration:NSTimeInterval){
         UIView.animateWithDuration(duration,
             animations: {
@@ -61,16 +62,12 @@ class Progress{
     func showIntermission(){
         let blips = 3
         for index in 1...blips {
-            //TODO: Refactor this into independent utility methods
             let duration = (self.intermissionSeconds / Double(blips))
             let delayInSeconds = duration * Double(index)
-            let popTime = TimeUtil.delayFromNow(delayInSeconds)
-            Log.debug("delay \(delayInSeconds)")
-       
-            // Here have to wait for each to finish
-            dispatch_after(popTime, dispatch_get_main_queue(),{
+            Conductor.playAfter(delayInSeconds){
                 self.blip(duration)
-            })
+            }
+  
         }
         
     }
