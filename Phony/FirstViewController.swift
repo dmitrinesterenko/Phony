@@ -62,17 +62,25 @@ class FirstViewController: UIViewController {
         Conductor.playAfter(player.duration){
             self.progress.showIntermission()
         }
-    
+        Conductor.playAfter(player.duration+0.5){
+            // Start Recording
+            // this selector means to check if the time of the recording has surpassed the time
+            // of the sample and will stop recording if this is the case
+            let checkRecordingTime : Selector = "checkRecordingTime:"
+            self.progress.recording()
+            self.recorder.record(self.player.duration)
+            self.progress.showSecondStep(self.player.duration)
+            // Show step two animation
+            
+            
+            self.timer.invalidate()
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: checkRecordingTime,
+                userInfo: self.recorder, repeats:true)
+        }
         
-        // Start Recording
-        // this selector means to check if the time of the recording has surpassed the time
-        // of the sample and will stop recording if this is the case
-        let checkRecordingTime : Selector = "checkRecordingTime:"
-
-        recorder.record(player.duration)
-        timer.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: checkRecordingTime,
-            userInfo: recorder, repeats:true)
+      
+        
+        // Play back to you what you just said
         
     }
     

@@ -51,8 +51,7 @@ class Progress{
     func showSecondStep(duration:NSTimeInterval){
         UIView.animateWithDuration(duration,
             animations: {
-                self.progress.backgroundColor = UIColor.redColor()
-                self.progress.frame = CGRect(x:self.view.frame.width - self.width, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height)
+                self.progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height) 
             },
             completion: { finished in
                 Log.debug("Finished \(__FUNCTION__)")
@@ -70,6 +69,17 @@ class Progress{
   
         }
         
+    }
+    
+    func recording(){
+        UIView.animateWithDuration(0.5,
+            animations: {
+                self.progress.backgroundColor = UIColor.redColor()
+            },
+            completion: { finished in
+                Log.debug("Finished \(__FUNCTION__)")
+        })
+
     }
     
     private func blip(duration:NSTimeInterval){
