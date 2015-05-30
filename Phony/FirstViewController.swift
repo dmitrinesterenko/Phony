@@ -16,15 +16,29 @@ class FirstViewController: UIViewController {
     //To avoid having to use and understand threading with the play back you can run everything on the main thread
     //including the player here makes the controller functions wait on the 
     //response from a player instance
+    //TODO: understand this better
     var player = Player()
     var timer = NSTimer()
+    var progress : Progress!
     
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var soundCircle: UIImageView!
     
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.progress = Progress(inView:self.view)
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         //TODO: load files from the selected dictionary
 
     }
@@ -37,26 +51,36 @@ class FirstViewController: UIViewController {
     // play is play and record + feedback
     @IBAction func play(sender: AnyObject) {
         let dictionaryUrl = FileManager.dictionariesUrl("Sample")
-        let fileUrl = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
+        let filePath = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
         let progressSelector : Selector = "updatePlayTime:"
-               player = Player(fileUrl: fileUrl)
+        player = Player(filePath:filePath)
         player.play()
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
-        // This needs to be inited at the viewLoad layer so that it's available all through out the view
-        // The progress bar(s) are the subviews
-        let progress = Progress(inView: self.view)
-        progress.showFirstStep(player.duration)
-        progress.showIntermissions()
         
-        // Start Recording
-        // this selector means to check if the time of the recording has surpassed the time
-        // of the sample and will stop recording if this is the case
-        let checkRecordingTime : Selector = "checkRecordingTime:"
-
-        recorder.record(player.duration)
-        timer.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: checkRecordingTime,
-            userInfo: recorder, repeats:true)
+        progress.start()
+        progress.showFirstStep(player.duration)
+        Conductor.playAfter(player.duration){
+            self.progress.showIntermission()
+        }
+        Conductor.playAfter(player.duration+0.5){
+            // Start Recording
+            // this selector means to check if the time of the recording has surpassed the time
+            // of the sample and will stop recording if this is the case
+            let checkRecordingTime : Selector = "checkRecordingTime:"
+            self.progress.recording()
+            self.recorder.record(self.player.duration)
+            self.progress.showSecondStep(self.player.duration)
+            // Show step two animation
+            
+            
+            self.timer.invalidate()
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: checkRecordingTime,
+                userInfo: self.recorder, repeats:true)
+        }
+        
+      
+        
+        // Play back to you what you just said
         
     }
     
@@ -69,7 +93,7 @@ class FirstViewController: UIViewController {
                 recorder.stop()
             }
         }
-    
+        
     }
     
     func updatePlayTime(currentTime:NSTimeInterval){

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A104B461B1257A60088FCFF /* TimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A104B451B1257A60088FCFF /* TimeUtil.swift */; };
+		0A104B471B1257A60088FCFF /* TimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A104B451B1257A60088FCFF /* TimeUtil.swift */; };
+		0A104B491B126C6F0088FCFF /* Conductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A104B481B126C6F0088FCFF /* Conductor.swift */; };
+		0A104B4A1B126C6F0088FCFF /* Conductor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A104B481B126C6F0088FCFF /* Conductor.swift */; };
 		0A1D35311AFE8B8000CA7364 /* Dictionaries in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D35301AFE8B8000CA7364 /* Dictionaries */; };
 		0A21C7CE1AFE95F90044C18B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21C7CD1AFE95F90044C18B /* Log.swift */; };
 		0A21C7CF1AFE95F90044C18B /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21C7CD1AFE95F90044C18B /* Log.swift */; };
@@ -46,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A104B451B1257A60088FCFF /* TimeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtil.swift; sourceTree = "<group>"; };
+		0A104B481B126C6F0088FCFF /* Conductor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conductor.swift; sourceTree = "<group>"; };
 		0A1D35301AFE8B8000CA7364 /* Dictionaries */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Dictionaries; path = Phony/Assets/Dictionaries; sourceTree = "<group>"; };
 		0A21C7CD1AFE95F90044C18B /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = Lib/Log.swift; sourceTree = "<group>"; };
 		0A3A81B21AF6AC1C0099B927 /* Hello.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hello.caf; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 				0A864DD41AF5630A0078D137 /* Recorder.swift */,
 				0A3A81B51AF6B8260099B927 /* Player.swift */,
 				0AA20FF61B111921005C2FD7 /* Progress.swift */,
+				0A104B481B126C6F0088FCFF /* Conductor.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -190,6 +197,7 @@
 				0A864DD81AF5E2A70078D137 /* FileManager.swift */,
 				0A864DDB1AF5E3040078D137 /* IdManager.swift */,
 				0A21C7CD1AFE95F90044C18B /* Log.swift */,
+				0A104B451B1257A60088FCFF /* TimeUtil.swift */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -308,7 +316,9 @@
 				0A864DB41AF552D10078D137 /* FirstViewController.swift in Sources */,
 				0A3A81B61AF6B8260099B927 /* Player.swift in Sources */,
 				0A864DDC1AF5E3040078D137 /* IdManager.swift in Sources */,
+				0A104B491B126C6F0088FCFF /* Conductor.swift in Sources */,
 				0A21C7CE1AFE95F90044C18B /* Log.swift in Sources */,
+				0A104B461B1257A60088FCFF /* TimeUtil.swift in Sources */,
 				0A864DD51AF5630A0078D137 /* Recorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,8 +331,10 @@
 				0A864DCA1AF552D10078D137 /* PhonyTests.swift in Sources */,
 				0A21C7CF1AFE95F90044C18B /* Log.swift in Sources */,
 				0AA20FF81B111921005C2FD7 /* Progress.swift in Sources */,
+				0A104B4A1B126C6F0088FCFF /* Conductor.swift in Sources */,
 				0A864DDD1AF5E3040078D137 /* IdManager.swift in Sources */,
 				0A3A81B71AF6B8260099B927 /* Player.swift in Sources */,
+				0A104B471B1257A60088FCFF /* TimeUtil.swift in Sources */,
 				0A864DD61AF5630A0078D137 /* Recorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

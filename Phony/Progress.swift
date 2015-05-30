@@ -19,15 +19,20 @@ class Progress{
     
     init(inView: UIView){
         view = inView
-        intermissionSeconds = 1.0
+        intermissionSeconds = 0.6
         progress = UIView()
-        progress.backgroundColor = UIColor.blackColor()
-        progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.width, height:self.height)
+        self.start()
         self.view.addSubview(progress)
     }
     
     deinit{
        self.progress.removeFromSuperview()
+    }
+    
+    func start(){
+        progress.alpha = 1.0
+        progress.backgroundColor = UIColor.blackColor()
+        progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.width, height:self.height)
     }
     
     func showFirstStep(duration:NSTimeInterval){
@@ -37,38 +42,58 @@ class Progress{
                 self.progress.frame = CGRect(x:self.view.frame.width - self.width, y:self.view.frame.height / 2.0, width:self.width, height:self.height)
             },
             completion: { finished in
-                println("finished")
+                Log.debug("Finished \(__FUNCTION__)")
+                //self.showIntermission()
+               
         })
     }
     
     func showSecondStep(duration:NSTimeInterval){
         UIView.animateWithDuration(duration,
             animations: {
-                self.progress.backgroundColor = UIColor.redColor()
-                self.progress.frame = CGRect(x:self.view.frame.width - self.width, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height)
+                self.progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height) 
             },
             completion: { finished in
-                println("finished")
+                Log.debug("Finished \(__FUNCTION__)")
         })
     }
     
-    func showIntermissions(){
+    func showIntermission(){
         let blips = 3
         for index in 1...blips {
-            let duration = self.intermissionSeconds / Double(blips)
-            blip(duration)
+            let duration = (self.intermissionSeconds / Double(blips))
+            let delayInSeconds = duration * Double(index)
+            Conductor.playAfter(delayInSeconds){
+                self.blip(duration)
+            }
+  
         }
         
+    }
+    
+    func recording(){
+        UIView.animateWithDuration(0.5,
+            animations: {
+                self.progress.backgroundColor = UIColor.redColor()
+            },
+            completion: { finished in
+                Log.debug("Finished \(__FUNCTION__)")
+        })
+
     }
     
     private func blip(duration:NSTimeInterval){
         var options = UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.Repeat
         UIView.animateWithDuration(duration,
             animations: {
-                self.progress.alpha = 0
+                Log.debug("Animating \(__FUNCTION__)")
+                self.progress.alpha = 0.2
             },
             completion: { finished in
-                println("finished")
+                if finished {
+                    self.progress.alpha = 1
+                    Log.debug("Finished \(__FUNCTION__)")
+                }
         })
         
     }

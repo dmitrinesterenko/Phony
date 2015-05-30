@@ -59,6 +59,9 @@ class Recorder{
         } else {
             recorded.append(url)
             audioRecorder.record()
+            Conductor.playAfter(duration){
+                self.stop()
+            }
         }
     }
     
@@ -79,11 +82,9 @@ class Recorder{
     
     func playLast(){
         if recorded.count > 0 {
-            var error:NSError?
-            audioPlayer = AVAudioPlayer(contentsOfURL: recorded.last, error: &error)
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-        }
+            let player = Player(fileURL: recorded.last!)
+            player.play()
+                   }
     }
     
 

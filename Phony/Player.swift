@@ -30,13 +30,18 @@ class Player{
     
     }
     
-    init(fileUrl: String){
+    init(fileURL: NSURL){
         var error:NSError?
-        currentFileUrl = NSURL(string:fileUrl)!
-        audioPlayer = AVAudioPlayer(contentsOfURL: currentFileUrl, error: &error)
+        self.currentFileUrl = fileURL
+        audioPlayer = AVAudioPlayer(contentsOfURL: self.currentFileUrl, error: &error)
         if error != nil{
             Log.exception(error!.localizedDescription)
         }
+    }
+    
+    convenience init(filePath: String){
+        let fileURL = NSURL(string:filePath)
+        self.init(fileURL: fileURL!)
     }
     
     func play(){

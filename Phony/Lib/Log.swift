@@ -18,6 +18,6 @@ class Log{
     }
     
     private static func log(message: String){
-         println(message);
+         NSLog(message);
     }
 }
