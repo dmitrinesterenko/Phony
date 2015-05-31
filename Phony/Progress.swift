@@ -73,7 +73,7 @@ class Progress{
                
         })
     }
-    // Intermission changes the color to red
+	
     func showSecondStep(duration:NSTimeInterval){
         self.view.addSubview(recordingProgress)
         self.recordingProgress.backgroundColor = UIColor.redColor()
