@@ -44,9 +44,10 @@ class Player{
         self.init(fileURL: fileURL!)
     }
     
-    func play(){
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
+    func play(){    
+        self.audioPlayer.prepareToPlay()
+        self.audioPlayer.play()
+    
     }
     
     
