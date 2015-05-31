@@ -34,7 +34,29 @@ class Progress{
     func start(){
         progress.alpha = 1.0
         progress.backgroundColor = UIColor.blackColor()
-        progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.width, height:self.height)
+        progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:0, height:self.height)
+    }
+    
+    func fadeOut(element: UIView, duration:NSTimeInterval){
+        UIView.animateWithDuration(duration,
+            animations: {
+                element.alpha = 0
+            },
+            completion: { finished in
+                //TODO decide if the element should be removed from it's super view
+                Log.debug("Finished \(__FUNCTION__)")
+            })
+    }
+    
+    func fadeIn(element: UIView, duration:NSTimeInterval){
+        UIView.animateWithDuration(duration,
+            animations: {
+                element.alpha = 1
+            },
+            completion: { finished in
+                //TODO decide if the element should be removed from it's super view
+                Log.debug("Finished \(__FUNCTION__)")
+        })
     }
     
     func showFirstStep(duration:NSTimeInterval){

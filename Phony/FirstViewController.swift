@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import QuartzCore
 
 class FirstViewController: UIViewController {
 
@@ -21,9 +22,7 @@ class FirstViewController: UIViewController {
     var timer = NSTimer()
     var progress : Progress!
     
-    @IBOutlet weak var duration: UILabel!
-    @IBOutlet weak var soundCircle: UIImageView!
-    
+    @IBOutlet weak var playButton: UIButton!
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,6 +31,8 @@ class FirstViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.progress = Progress(inView:self.view)
+        self.playButton.layer.borderWidth = 1.0
+        self.playButton.layer.cornerRadius = 4.0
     }
 
 
@@ -56,7 +57,8 @@ class FirstViewController: UIViewController {
     @IBAction func play(sender: AnyObject) {
         let dictionaryUrl = FileManager.dictionariesUrl("Sample")
         let filePath = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
-        // Play	
+        // Play
+        progress.fadeOut(playButton, duration: 0.5)
         player = Player(filePath:filePath)
         player.play()
         
@@ -74,11 +76,12 @@ class FirstViewController: UIViewController {
            
         }
 
-        // Play back to you what you just said
+        // Play back 
         Conductor.playAfter(2*player.duration+progress.intermissionSeconds){
             self.progress.showThirdStep(self.player.duration)
             self.player = Player(fileURL:self.recorder.recorded.last!)
             self.player.play()
+            self.progress.fadeIn(self.playButton, duration: 0.5)
         }
     }
     
