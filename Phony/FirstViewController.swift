@@ -56,29 +56,21 @@ class FirstViewController: UIViewController {
     @IBAction func play(sender: AnyObject) {
         let dictionaryUrl = FileManager.dictionariesUrl("Sample")
         let filePath = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
-        let progressSelector : Selector = "updatePlayTime:"
+        // Play	
         player = Player(filePath:filePath)
         player.play()
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
         
         progress.start()
-              progress.showFirstStep(player.duration)
+        progress.showFirstStep(player.duration)
         Conductor.playAfter(player.duration){
             self.progress.showIntermission()
         }
+        // Record
         Conductor.playAfter(player.duration+progress.intermissionSeconds){
-            // Start Recording
-            // this selector means to check if the time of the recording has surpassed the time
-            // of the sample and will stop recording if this is the case
-            let checkRecordingTime : Selector = "checkRecordingTime:"
             self.progress.recording()
             self.recorder.record(self.player.duration)
             self.progress.showSecondStep(self.player.duration)
            
-            
-            self.timer.invalidate()
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: checkRecordingTime,
-                userInfo: self.recorder, repeats:true)
            
         }
 
@@ -88,57 +80,7 @@ class FirstViewController: UIViewController {
             self.player = Player(fileURL:self.recorder.recorded.last!)
             self.player.play()
         }
-        
-      
-        
-
-        
     }
     
-    // Check if the recorded time exceeds the duration of the sample and indicate that the recording is done
-    func checkRecordingTime(sender: AnyObject?){
-        if let recorder = sender as? Recorder {
-            //TODO: refactor into helper method
-            if recorder.currentTime > recorder.durationToRecord{
-                //HALT AND CATCH FIRE
-                recorder.stop()
-            }
-        }
-        
-    }
-    
-    func updatePlayTime(currentTime:NSTimeInterval){
-       duration.text = "\(player.currentTime)"
-    }
-    
-    @IBAction func record(sender: AnyObject) {
-        
-        
-        
-//        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
-        
-        
-        //TODO: Refactor into a UIStateUpdater
-        sender.setTitle("Stop", forState: UIControlState.Normal)
-        sender.removeTarget(self, action: "record:", forControlEvents:UIControlEvents.TouchUpInside)
-        sender.addTarget(self, action: "stop:", forControlEvents: UIControlEvents.TouchUpInside)
-    }
-    
-    @IBAction func stop(sender: AnyObject) {
-        recorder.stop()
-        //TODO: Refactor into a UIStateUpdateri
-        timer.invalidate()
-        
-        
-        sender.setTitle("Record", forState: UIControlState.Normal)
-        sender.removeTarget(self, action: "stop:", forControlEvents:UIControlEvents.TouchUpInside)
-        sender.addTarget(self, action: "record:", forControlEvents: UIControlEvents.TouchUpInside)
-    }
-    
-    @IBAction func playLast(sender: AnyObject) {
-        self.player = Player(fileURL:self.recorder.recorded.last!)
-        self.player.play()
-        //recorder.playLast()
-    }
 }
 
