@@ -58,11 +58,15 @@ class FirstViewController: UIViewController {
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
         
         progress.start()
+        //The duration of the sample determines the entire orchestration of the 3 steps
+        // 1. Play
+        // 2. Record the user
+        // 3. Playback the recording to the user
         progress.showFirstStep(player.duration)
         Conductor.playAfter(player.duration){
             self.progress.showIntermission()
         }
-        Conductor.playAfter(player.duration+0.5){
+        Conductor.playAfter(player.duration+progress.intermissionSeconds){
             // Start Recording
             // this selector means to check if the time of the recording has surpassed the time
             // of the sample and will stop recording if this is the case
@@ -76,11 +80,19 @@ class FirstViewController: UIViewController {
             self.timer.invalidate()
             self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: checkRecordingTime,
                 userInfo: self.recorder, repeats:true)
+           
+        }
+
+        // Play back to you what you just said
+        Conductor.playAfter(2*player.duration+progress.intermissionSeconds){
+            self.progress.showThirdStep(self.player.duration)
+            self.player = Player(fileURL:self.recorder.recorded.last!)
+            self.recorder.playLast()
         }
         
       
         
-        // Play back to you what you just said
+
         
     }
     

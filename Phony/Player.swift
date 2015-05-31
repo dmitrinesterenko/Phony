@@ -45,8 +45,10 @@ class Player{
     }
     
     func play(){
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
+        dispatch_async(dispatch_get_main_queue()){
+            self.audioPlayer.prepareToPlay()
+            self.audioPlayer.play()
+        }
     }
     
     

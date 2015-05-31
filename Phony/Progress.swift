@@ -15,12 +15,14 @@ class Progress{
     var width : CGFloat = 50.0
     var height : CGFloat = 50.0
     var progress : UIView
+    var playbackProgress: UIView
     var intermissionSeconds : Double
     
     init(inView: UIView){
         view = inView
         intermissionSeconds = 0.6
         progress = UIView()
+        playbackProgress = UIView()
         self.start()
         self.view.addSubview(progress)
     }
@@ -43,7 +45,6 @@ class Progress{
             },
             completion: { finished in
                 Log.debug("Finished \(__FUNCTION__)")
-                //self.showIntermission()
                
         })
     }
@@ -52,6 +53,19 @@ class Progress{
         UIView.animateWithDuration(duration,
             animations: {
                 self.progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height) 
+            },
+            completion: { finished in
+                Log.debug("Finished \(__FUNCTION__)")
+        })
+    }
+    
+    func showThirdStep(duration:NSTimeInterval){
+        self.view.addSubview(playbackProgress)
+        self.playbackProgress.backgroundColor = UIColor.greenColor()
+        self.playbackProgress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.width, height:self.height)
+        UIView.animateWithDuration(duration,
+            animations: {
+                self.progress.frame = CGRect(x:self.view.frame.width - self.width, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height)
             },
             completion: { finished in
                 Log.debug("Finished \(__FUNCTION__)")

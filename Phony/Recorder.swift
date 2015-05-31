@@ -83,8 +83,18 @@ class Recorder{
     func playLast(){
         if recorded.count > 0 {
             let player = Player(fileURL: recorded.last!)
+            Log.debug("Recorded URL: \(recorded.last)")
             player.play()
-                   }
+            //TODO: if this works this should be a dispatch_async not an after
+            // unless I find a reason to have a delay here
+//            dispatch_async(dispatch_get_main_queue()){
+//                player.play()
+//            }
+//            dispatch_after(0, dispatch_get_main_queue(),{
+//               player.play()
+//            })
+            
+        }
     }
     
 
