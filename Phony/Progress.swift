@@ -62,10 +62,10 @@ class Progress{
     func showThirdStep(duration:NSTimeInterval){
         self.view.addSubview(playbackProgress)
         self.playbackProgress.backgroundColor = UIColor.greenColor()
-        self.playbackProgress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.width, height:self.height)
+        self.playbackProgress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:0, height:self.height)
         UIView.animateWithDuration(duration,
             animations: {
-                self.progress.frame = CGRect(x:self.view.frame.width - self.width, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height)
+                self.playbackProgress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height)
             },
             completion: { finished in
                 Log.debug("Finished \(__FUNCTION__)")

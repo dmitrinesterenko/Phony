@@ -48,7 +48,11 @@ class FirstViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // play is play and record + feedback
+    //
+    // 1. Play
+    // 2. Record the user
+    // 3. Playback the recording to the user
+    // The duration of the sample in step 1 determines the entire orchestration of the 3 steps
     @IBAction func play(sender: AnyObject) {
         let dictionaryUrl = FileManager.dictionariesUrl("Sample")
         let filePath = dictionaryUrl.stringByAppendingPathComponent("Hello.caf")
@@ -58,11 +62,7 @@ class FirstViewController: UIViewController {
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: progressSelector, userInfo: player.currentTime, repeats:true)
         
         progress.start()
-        //The duration of the sample determines the entire orchestration of the 3 steps
-        // 1. Play
-        // 2. Record the user
-        // 3. Playback the recording to the user
-        progress.showFirstStep(player.duration)
+              progress.showFirstStep(player.duration)
         Conductor.playAfter(player.duration){
             self.progress.showIntermission()
         }
@@ -74,8 +74,7 @@ class FirstViewController: UIViewController {
             self.progress.recording()
             self.recorder.record(self.player.duration)
             self.progress.showSecondStep(self.player.duration)
-            // Show step two animation
-            
+           
             
             self.timer.invalidate()
             self.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target:self, selector: checkRecordingTime,
@@ -87,7 +86,7 @@ class FirstViewController: UIViewController {
         Conductor.playAfter(2*player.duration+progress.intermissionSeconds){
             self.progress.showThirdStep(self.player.duration)
             self.player = Player(fileURL:self.recorder.recorded.last!)
-            self.recorder.playLast()
+            self.player.play()
         }
         
       
@@ -137,7 +136,9 @@ class FirstViewController: UIViewController {
     }
     
     @IBAction func playLast(sender: AnyObject) {
-        recorder.playLast()
+        self.player = Player(fileURL:self.recorder.recorded.last!)
+        self.player.play()
+        //recorder.playLast()
     }
 }
 

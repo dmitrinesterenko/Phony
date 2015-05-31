@@ -44,11 +44,10 @@ class Player{
         self.init(fileURL: fileURL!)
     }
     
-    func play(){
-        dispatch_async(dispatch_get_main_queue()){
-            self.audioPlayer.prepareToPlay()
-            self.audioPlayer.play()
-        }
+    func play(){    
+        self.audioPlayer.prepareToPlay()
+        self.audioPlayer.play()
+    
     }
     
     

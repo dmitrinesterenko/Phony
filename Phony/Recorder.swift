@@ -15,9 +15,6 @@ class Recorder{
     var recorded: Array<NSURL> = []
     var durationToRecord: NSTimeInterval = 0.0
     
-    //TODO: Move this into it's own class called Boombox
-    var audioPlayer = AVAudioPlayer()
-
     //MARK: Actions
 
     func record(duration: NSTimeInterval){
@@ -71,30 +68,13 @@ class Recorder{
     
     func stop(){
         if audioRecorder.recording {
-            println("Recording stopped")
             audioRecorder.stop()
+            Log.debug("Recording stopped")
         }
     }
     
     func recording() -> Bool {
         return audioRecorder.recording
-    }
-    
-    func playLast(){
-        if recorded.count > 0 {
-            let player = Player(fileURL: recorded.last!)
-            Log.debug("Recorded URL: \(recorded.last)")
-            player.play()
-            //TODO: if this works this should be a dispatch_async not an after
-            // unless I find a reason to have a delay here
-//            dispatch_async(dispatch_get_main_queue()){
-//                player.play()
-//            }
-//            dispatch_after(0, dispatch_get_main_queue(),{
-//               player.play()
-//            })
-            
-        }
     }
     
 
