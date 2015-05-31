@@ -76,12 +76,11 @@ class Progress{
     // Intermission changes the color to red
     func showSecondStep(duration:NSTimeInterval){
         self.view.addSubview(recordingProgress)
-        self.recordingProgress.backgroundColor = self.progress.backgroundColor
+        self.recordingProgress.backgroundColor = UIColor.redColor()
         self.recordingProgress.frame = CGRect(x:self.view.frame.width, y:self.view.frame.height - self.height - 50, width:0, height:self.height)
         
         UIView.animateWithDuration(duration,
             animations: {
-                self.recordingProgress.backgroundColor = UIColor.redColor()
                 self.recordingProgress.frame = CGRect(x:0, y:self.view.frame.height - self.height - 50, width:self.view.frame.width, height:self.height)
             },
             completion: { finished in
@@ -115,17 +114,7 @@ class Progress{
         }
         
     }
-    
-    func recording(){
-        UIView.animateWithDuration(0.5,
-            animations: {
-                self.progress.backgroundColor = UIColor.redColor()
-            },
-            completion: { finished in
-                Log.debug("Finished \(__FUNCTION__)")
-        })
-
-    }
+   
     
     private func blip(duration:NSTimeInterval){
         var options = UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.Repeat
@@ -133,10 +122,12 @@ class Progress{
             animations: {
                 Log.debug("Animating \(__FUNCTION__)")
                 self.progress.alpha = 0.2
+                self.progress.backgroundColor = UIColor.redColor()
             },
             completion: { finished in
                 if finished {
                     self.progress.alpha = 1
+                    self.progress.backgroundColor = UIColor.whiteColor()
                     Log.debug("Finished \(__FUNCTION__)")
                 }
         })
