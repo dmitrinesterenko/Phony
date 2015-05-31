@@ -69,7 +69,7 @@ class FirstViewController: UIViewController {
         }
         // Record
         Conductor.playAfter(player.duration+progress.intermissionSeconds){
-            self.progress.recording()
+            //self.progress.recording()
             self.recorder.record(self.player.duration)
             self.progress.showSecondStep(self.player.duration)
            

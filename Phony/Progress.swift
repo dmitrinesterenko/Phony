@@ -16,6 +16,7 @@ class Progress{
     var height : CGFloat = 50.0
     var progress : UIView
     var playbackProgress: UIView
+    var recordingProgress: UIView
     var intermissionSeconds : Double
     
     init(inView: UIView){
@@ -23,18 +24,20 @@ class Progress{
         intermissionSeconds = 0.6
         progress = UIView()
         playbackProgress = UIView()
-        self.start()
-        self.view.addSubview(progress)
+        recordingProgress = UIView()
+        start()
+
     }
     
     deinit{
-       self.progress.removeFromSuperview()
+        unload()
     }
     
     func start(){
+        view.addSubview(progress)
         progress.alpha = 1.0
         progress.backgroundColor = UIColor.blackColor()
-        progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:0, height:self.height)
+        progress.frame = CGRect(x:0, y:0, width:self.view.frame.width, height:self.height)
     }
     
     func fadeOut(element: UIView, duration:NSTimeInterval){
@@ -63,18 +66,23 @@ class Progress{
         UIView.animateWithDuration(duration,
             animations: {
                 self.progress.backgroundColor = UIColor.whiteColor()
-                self.progress.frame = CGRect(x:self.view.frame.width - self.width, y:self.view.frame.height / 2.0, width:self.width, height:self.height)
+                self.progress.frame = CGRect(x:0, y:self.view.frame.height - self.height - 50, width:self.view.frame.width, height:self.height)
             },
             completion: { finished in
                 Log.debug("Finished \(__FUNCTION__)")
                
         })
     }
-    
+    // Intermission changes the color to red
     func showSecondStep(duration:NSTimeInterval){
+        self.view.addSubview(recordingProgress)
+        self.recordingProgress.backgroundColor = self.progress.backgroundColor
+        self.recordingProgress.frame = CGRect(x:self.view.frame.width, y:self.view.frame.height - self.height - 50, width:0, height:self.height)
+        
         UIView.animateWithDuration(duration,
             animations: {
-                self.progress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height) 
+                self.recordingProgress.backgroundColor = UIColor.redColor()
+                self.recordingProgress.frame = CGRect(x:0, y:self.view.frame.height - self.height - 50, width:self.view.frame.width, height:self.height)
             },
             completion: { finished in
                 Log.debug("Finished \(__FUNCTION__)")
@@ -84,13 +92,14 @@ class Progress{
     func showThirdStep(duration:NSTimeInterval){
         self.view.addSubview(playbackProgress)
         self.playbackProgress.backgroundColor = UIColor.greenColor()
-        self.playbackProgress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:0, height:self.height)
+        self.playbackProgress.frame = CGRect(x:0, y:self.view.frame.height - self.height - 50, width:0, height:self.height)
         UIView.animateWithDuration(duration,
             animations: {
-                self.playbackProgress.frame = CGRect(x:0, y:self.view.frame.height / 2.0, width:self.view.frame.width, height:self.height)
+                self.playbackProgress.frame = CGRect(x:0, y:self.view.frame.height - self.height - 50, width:self.view.frame.width, height:self.height)
             },
             completion: { finished in
                 Log.debug("Finished \(__FUNCTION__)")
+                self.unload()
         })
     }
     
@@ -132,5 +141,11 @@ class Progress{
                 }
         })
         
+    }
+    
+    private func unload(){
+        self.progress.removeFromSuperview()
+        self.playbackProgress.removeFromSuperview()
+        self.recordingProgress.removeFromSuperview()
     }
 }
